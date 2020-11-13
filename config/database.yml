@@ -1,0 +1,21 @@
+default: &default
+  adapter: mysql2
+  encording: utf8
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: shimizu
+  password: password
+  host: localhost
+
+development:
+  <<: *default
+  database: deploy_development
+
+test:
+  <<: *default
+  database: deploy_test
+
+production:
+  <<: *default
+  database: deploy_production
+  username: deploy
+  password: <%= ENV['AWS-DEPLOY_DATEBASE_PASSWORD'] %>
